@@ -18,8 +18,27 @@ Keywords from
     texthash ~/Library/texmf # to update tex's database
     kpsewhich jslistings.sty # to make sure it knows it
 
+# Issue
+Unable to color closing parentheses when `breaklines` is set to `true` like:
+
+    \lstset{
+        % ...
+        breaklines=true,
+        % ...
+    }
+
+Then use the package `etoolbox` to add the `patchcmd` command and use it this way:
+
+    \usepackage{etoolbox} % provides the \patchcmd macro
+    %    % ...
+    %    \makeatletter
+    %    \patchcmd{\lsthk@SelectCharTable}{`)}{``}{}{} % patch listings
+    %    %\patchcmd{\lsthk@SelectCharTable}{``}{`)}{}{} % undo patch if needed
+    %    \makeatother
+
+
 # More
 
-Don't look more for it, but can generate an dtx from the sty:
+Didn't look more for it, but can generate an dtx from the sty:
 
     sty2dtx jslistings.sty
