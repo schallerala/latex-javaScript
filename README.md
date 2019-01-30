@@ -1,5 +1,5 @@
 # Latex-JavaScript
-Typeset JavaScript codes in Latex.
+Typeset JavaScript codes in Latex based on the [Boxy Yesterday](https://marketplace.visualstudio.com/items?itemName=trongthanh.theme-boxythemekit#user-content-boxy-yesterday) scheme.
 
 Keywords from
 
@@ -8,7 +8,7 @@ Keywords from
     - Express.js
     - Jasmine
 
-
+Original color scheme:
 ![Sample](https://cloud.githubusercontent.com/assets/5876481/26476923/c2932232-4176-11e7-9017-329709928c3d.png)
 
 
@@ -20,22 +20,23 @@ Keywords from
 
 # Issue
 Unable to color closing parentheses when `breaklines` is set to `true` like:
+```latex
+\lstset{
+    % ...
+    breaklines=true,
+    % ...
+}
+```
 
-    \lstset{
-        % ...
-        breaklines=true,
-        % ...
-    }
-
-Then use the package `etoolbox` to add the `patchcmd` command and use it this way:
-
-    \usepackage{etoolbox} % provides the \patchcmd macro
-    %    % ...
-    %    \makeatletter
-    %    \patchcmd{\lsthk@SelectCharTable}{`)}{``}{}{} % patch listings
-    %    %\patchcmd{\lsthk@SelectCharTable}{``}{`)}{}{} % undo patch if needed
-    %    \makeatother
-
+Then use the package `etoolbox` to add the `patchcmd` command and use it this way ([Stackoverflow answer](https://tex.stackexchange.com/a/172975/164820)):
+```latex
+\usepackage{etoolbox} % provides the \patchcmd macro
+% ...
+\makeatletter
+\patchcmd{\lsthk@SelectCharTable}{`)}{``}{}{} % patch listings
+%\patchcmd{\lsthk@SelectCharTable}{``}{`)}{}{} % undo patch if needed
+\makeatother
+```
 
 # More
 
